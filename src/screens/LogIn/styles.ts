@@ -9,38 +9,21 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    marginTop: globalStyles.vh * 0.2,
+    marginTop: globalStyles.vh * 0.15,
     marginBottom: globalStyles.vh * 0.1,
     fontSize: 42,
     color: globalStyles.colors.purple500,
     fontWeight: "bold",
   },
   inputsContainer: {
-    marginBottom: "auto",
+    // marginTop: globalStyles.vh * 0.1,
   },
   inputContainer: {
     position: "relative",
   },
-  inputContainerPassword: {
-    marginTop: 20,
-  },
-  input: {
-    height: 50,
-    width: globalStyles.vw * 0.8,
-    paddingLeft: 8,
-    borderWidth: 2,
-    borderRadius: 8,
-    borderColor: globalStyles.colors.gray500,
-    fontSize: 18,
-    backgroundColor: globalStyles.colors.white,
-  },
-  icon: {
-    position: "absolute",
-    top: 66,
-    right: 16,
-    transform: [{ translateY: -50 }],
-  },
   buttonsContainer: {
+    marginTop: "auto",
+    marginBottom: 40,
     display: "flex",
     flexDirection: "column",
   },

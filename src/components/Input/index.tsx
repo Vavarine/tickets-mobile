@@ -4,12 +4,11 @@ import Icon from "react-native-vector-icons/Feather";
 import { globalStyles } from "../../styles/globalStyles";
 import { styles } from "./styles";
 
-type ButtonProps = TextInputProps & {
-  text: string;
+type InputProps = TextInputProps & {
   iconName?: string;
 };
 
-export function Input({ iconName, style, ...rest }: ButtonProps) {
+export function Input({ iconName, style, ...rest }: InputProps) {
   const [text, setText] = useState("");
 
   return (
@@ -21,12 +20,14 @@ export function Input({ iconName, style, ...rest }: ButtonProps) {
         autoCompleteType="email"
         {...rest}
       />
-      <Icon
-        style={styles.icon}
-        name="mail"
-        size={18}
-        color={globalStyles.colors.gray500}
-      />
+      {iconName && (
+        <Icon
+          style={styles.icon}
+          name={iconName}
+          size={18}
+          color={globalStyles.colors.gray500}
+        />
+      )}
     </View>
   );
 }

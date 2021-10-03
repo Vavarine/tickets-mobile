@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   input: {
     height: 50,
     width: globalStyles.vw * 0.8,
-    paddingLeft: 8,
+    paddingLeft: 15,
     borderWidth: 2,
     borderRadius: 8,
     borderColor: globalStyles.colors.gray500,
