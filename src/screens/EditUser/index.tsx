@@ -1,16 +1,26 @@
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation, useRoute } from "@react-navigation/core";
 import React, { useEffect, useRef, useState } from "react";
 import { Text, View, Keyboard, ToastAndroid } from "react-native";
+import { User } from "../../@types";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { InputPassword } from "../../components/InputPassword";
 import { database } from "../../services/firebase";
+import { globalStyles } from "../../styles/globalStyles";
 
 import { styles } from "./styles";
 
-export function SignIn() {
+interface EditUserParams {
+  user: User;
+  id: string;
+}
+
+export function EditUser() {
+  const [toEditUser, setToEditUser] = useState({} as User);
+  const [toEditUserId, setToEditUserId] = useState("");
+
   const [name, setName] = useState("");
-  const [company, setcompany] = useState("");
+  const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -18,8 +28,19 @@ export function SignIn() {
   const [isKeyBoardUp, setIsKeyBoardUp] = useState(false);
 
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const { user, id } = route.params as EditUserParams;
 
   useEffect(() => {
+    setToEditUser(user);
+    setToEditUserId(id);
+
+    setName(user.name);
+    setEmail(user.email);
+    setCompany(user.company);
+    setPassword(user.password);
+
     const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
       setIsKeyBoardUp(true);
     });
@@ -66,18 +87,21 @@ export function SignIn() {
       type: "costumer",
     };
 
-    const userRef = database.collection("users");
+    const userRef = database.collection("users").doc(id);
 
-    const user = await userRef.where("email", "==", email).get();
+    await userRef.update(data);
 
-    if (user.empty) {
-      await userRef.add(data);
+    ToastAndroid.show("Usuário editado!", ToastAndroid.LONG);
+    navigation.goBack();
+  }
 
-      ToastAndroid.show("Cadastrado!", ToastAndroid.LONG);
-      navigation.navigate("LogIn" as any);
-    } else {
-      ToastAndroid.show("Usuário já existe", ToastAndroid.LONG);
-    }
+  async function handleDelete() {
+    const userRef = database.collection("users").doc(id);
+
+    await userRef.delete();
+
+    ToastAndroid.show("Usuário removido!", ToastAndroid.LONG);
+    navigation.goBack();
   }
 
   function emailIsValid(email) {
@@ -88,12 +112,12 @@ export function SignIn() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Cadastre-se</Text>
+      <Text style={styles.title}>Editar Usuário</Text>
 
       <View style={styles.inputsContainer}>
         <Input
           iconName="user"
-          placeholder="Digite seu nome"
+          placeholder="Nome"
           value={name}
           onChangeText={setName}
           autoCompleteType="name"
@@ -103,16 +127,16 @@ export function SignIn() {
 
         <Input
           iconName="briefcase"
-          placeholder="Digite o nome da empresa"
+          placeholder="Empresa"
           value={company}
-          onChangeText={setcompany}
+          onChangeText={setCompany}
           autoCapitalize="words"
           style={{ marginBottom: 20 }}
         />
 
         <Input
           iconName="mail"
-          placeholder="Digite seu email"
+          placeholder="Email"
           value={email}
           onChangeText={setEmail}
           autoCompleteType="email"
@@ -121,7 +145,7 @@ export function SignIn() {
 
         <InputPassword
           value={password}
-          placeholder="Digite sua senha"
+          placeholder="Senha"
           onChangeText={setPassword}
           autoCompleteType="password"
           style={{ marginBottom: 20 }}
@@ -129,7 +153,7 @@ export function SignIn() {
 
         <InputPassword
           value={repeatPassword}
-          placeholder="Repita sua senha"
+          placeholder="Repita a senha"
           onChangeText={setRepeatPassword}
           autoCompleteType="password"
         />
@@ -137,7 +161,18 @@ export function SignIn() {
 
       {!isKeyBoardUp && (
         <View style={styles.buttonsContainer}>
-          <Button type="default" text="Cadastrar" onPress={handleSubmit} />
+          <Button
+            style={{ width: globalStyles.vw * 0.38, marginRight: globalStyles.vw * 0.04 }}
+            type="submit"
+            text="Salvar"
+            onPress={handleSubmit}
+          />
+          <Button
+            style={{ width: globalStyles.vw * 0.38 }}
+            type="cancel"
+            text="Excluir"
+            onPress={handleDelete}
+          />
         </View>
       )}
     </View>

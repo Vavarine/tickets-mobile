@@ -18,6 +18,7 @@ export function Input({ iconName, style, ...rest }: InputProps) {
         value={text}
         onChangeText={setText}
         autoCompleteType="email"
+        autoCapitalize="none"
         {...rest}
       />
       {iconName && (

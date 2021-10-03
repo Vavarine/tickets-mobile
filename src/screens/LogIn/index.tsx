@@ -41,6 +41,10 @@ export function LogIn() {
     snapshot.forEach((user) => {
       if (user.data().password === password) {
         ToastAndroid.show("Usuário Logado!", ToastAndroid.LONG);
+
+        const userData = user.data();
+
+        navigation.navigate("Home" as never, user.data() as never);
       } else {
         ToastAndroid.show("Senha incorreta!", ToastAndroid.LONG);
       }
