@@ -10,14 +10,13 @@ import { Input } from "../../components/Input";
 
 import { styles } from "./styles";
 import { globalStyles } from "../../styles/globalStyles";
+import useAuth from "../../hooks/useAuth";
 
-interface CostumerHomeProps {
-  logedUser: User;
-}
-
-export function AdminHome({ logedUser }: CostumerHomeProps) {
+export function AdminHome() {
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setUsers] = useState([]);
+
+  const { user } = useAuth();
 
   const isFocused = useIsFocused();
 
@@ -66,18 +65,9 @@ export function AdminHome({ logedUser }: CostumerHomeProps) {
 
   return (
     <View style={{ ...styles.container, justifyContent: "flex-start" }}>
-      <Text
-        style={{
-          ...styles.title,
-          fontSize: 22,
-          marginTop: 100,
-          marginBottom: 30,
-        }}
-      >
-        Olá, {logedUser.name} (Admin)
-      </Text>
       <View
         style={{
+          marginTop: 30,
           marginBottom: 40,
           display: "flex",
           alignItems: "center",

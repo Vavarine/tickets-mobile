@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
 import { Text, View, ToastAndroid } from "react-native";
 
@@ -7,15 +7,14 @@ import { AdminHome } from "./AdminHome";
 
 import { styles } from "./styles";
 import { User } from "../../@types";
+import useAuth from "../../hooks/useAuth";
 
 export function Home() {
-  const route = useRoute();
-
-  const user = route.params as User;
+  const { user } = useAuth();
 
   if (user.type === "admin") {
-    return <AdminHome logedUser={user as User} />;
+    return <AdminHome />;
   }
 
-  return <CostumerHome user={user as User} />;
+  return <CostumerHome />;
 }

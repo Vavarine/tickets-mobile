@@ -39,7 +39,7 @@ export function EditUser() {
     setName(user.name);
     setEmail(user.email);
     setCompany(user.company);
-    setPassword(user.password);
+    // setPassword(user.password);
 
     const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
       setIsKeyBoardUp(true);

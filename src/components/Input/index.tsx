@@ -26,7 +26,7 @@ export function Input({ iconName, style, ...rest }: InputProps) {
           style={styles.icon}
           name={iconName}
           size={18}
-          color={globalStyles.colors.gray500}
+          color={globalStyles.colors.gray700}
         />
       )}
     </View>

@@ -8,11 +8,13 @@ import { InputPassword } from "../../components/InputPassword";
 
 import { styles } from "./styles";
 import { database } from "../../services/firebase";
+import useAuth from "../../hooks/useAuth";
 
 export function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { login } = useAuth();
   const navigation = useNavigation();
 
   async function handleSubmit() {
@@ -28,27 +30,13 @@ export function LogIn() {
       return;
     }
 
-    const usersRef = database.collection("users");
-
-    const snapshot = await usersRef.where("email", "==", email).get();
-
-    if (snapshot.empty) {
-      ToastAndroid.show("Usuário não existe", ToastAndroid.LONG);
-
+    try {
+      await login(email, password);
+    } catch (err) {
       return;
     }
 
-    snapshot.forEach((user) => {
-      if (user.data().password === password) {
-        ToastAndroid.show("Usuário Logado!", ToastAndroid.LONG);
-
-        const userData = user.data();
-
-        navigation.navigate("Home" as never, user.data() as never);
-      } else {
-        ToastAndroid.show("Senha incorreta!", ToastAndroid.LONG);
-      }
-    });
+    navigation.navigate("Home" as any);
   }
 
   function emailIsValid(email) {

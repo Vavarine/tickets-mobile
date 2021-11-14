@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     marginTop: globalStyles.vh * 0.15,
     marginBottom: globalStyles.vh * 0.1,
     fontSize: 42,
-    color: globalStyles.colors.purple500,
+    color: globalStyles.colors.purple900,
     fontWeight: "bold",
   },
   inputsContainer: {

@@ -6,12 +6,13 @@ export const globalStyles = {
   vw: Dimensions.get("window").width,
   vh: Dimensions.get("window").height,
   colors: {
-    background: "#DFE6ED",
-    white: "#fff",
-    purple500: "#730FC3",
-    red500: "#D3455B",
+    background: "#eee",
+    white: "#eee",
+    purple900: "#392F5A",
+    red500: "#c5283d",
     green500: "#1AAE9F",
     gray400: "#B8C4CF",
     gray500: "#788896",
+    gray700: "#6b8496",
   },
 };

@@ -5,12 +5,12 @@ export const styles = StyleSheet.create({
   default: {
     height: 50,
     width: globalStyles.vw * 0.8,
-    backgroundColor: globalStyles.colors.purple500,
+    backgroundColor: globalStyles.colors.gray700,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    borderRadius: 8,
+    borderRadius: 12,
   },
   cancel: {
     height: 50,

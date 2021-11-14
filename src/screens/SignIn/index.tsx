@@ -1,10 +1,12 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useRef, useState } from "react";
 import { Text, View, Keyboard, ToastAndroid } from "react-native";
+import { User } from "../../@types";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { InputPassword } from "../../components/InputPassword";
-import { database } from "../../services/firebase";
+import useAuth from "../../hooks/useAuth";
+import { auth, database } from "../../services/firebase";
 
 import { styles } from "./styles";
 
@@ -17,6 +19,7 @@ export function SignIn() {
 
   const [isKeyBoardUp, setIsKeyBoardUp] = useState(false);
 
+  const { signIn } = useAuth();
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -58,26 +61,26 @@ export function SignIn() {
       return;
     }
 
-    const data = {
+    if (password.length < 6) {
+      ToastAndroid.show("A senha deve conter ao menos 6 caracteres!", ToastAndroid.LONG);
+
+      return;
+    }
+
+    const userData: User = {
       name: name.trim(),
       company: company.trim(),
       email: email.trim(),
-      password: password.trim(),
       type: "costumer",
     };
 
-    const userRef = database.collection("users");
-
-    const user = await userRef.where("email", "==", email).get();
-
-    if (user.empty) {
-      await userRef.add(data);
-
-      ToastAndroid.show("Cadastrado!", ToastAndroid.LONG);
-      navigation.navigate("LogIn" as any);
-    } else {
-      ToastAndroid.show("Usuário já existe", ToastAndroid.LONG);
+    try {
+      await signIn(userData, password.trim());
+    } catch (err) {
+      return;
     }
+
+    navigation.navigate("LogIn" as never);
   }
 
   function emailIsValid(email) {
