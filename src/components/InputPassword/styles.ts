@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { globalStyles } from "../../styles/globalStyles";
+import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
   inputContainer: {
@@ -7,14 +7,14 @@ export const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    width: globalStyles.vw * 0.8,
+    width: theme.vw * 0.8,
     paddingLeft: 15,
     borderWidth: 1.5,
     borderRadius: 8,
-    borderColor: globalStyles.colors.gray500,
-    color: globalStyles.colors.gray500,
+    borderColor: theme.colors.gray500,
+    color: theme.colors.gray500,
     fontSize: 18,
-    backgroundColor: globalStyles.colors.white,
+    backgroundColor: theme.colors.white,
   },
   icon: {
     position: "absolute",

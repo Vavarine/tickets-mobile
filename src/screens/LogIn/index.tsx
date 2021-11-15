@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Text, View, ToastAndroid } from "react-native";
+import { Text, View, ToastAndroid, ActivityIndicator } from "react-native";
 
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { InputPassword } from "../../components/InputPassword";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { styles } from "./styles";
-import { database } from "../../services/firebase";
 import useAuth from "../../hooks/useAuth";
 
 export function LogIn() {
+  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -30,9 +31,12 @@ export function LogIn() {
       return;
     }
 
+    setIsLoading(true);
+
     try {
       await login(email, password);
     } catch (err) {
+      setIsLoading(false);
       return;
     }
 
@@ -68,15 +72,20 @@ export function LogIn() {
       </View>
 
       <View style={styles.buttonsContainer}>
-        <Button type="default" text="Entrar" onPress={handleSubmit} />
         <Button
           type="default"
-          text="Cadastrar"
-          style={{ marginTop: 10 }}
+          text="Entrar"
+          onPress={handleSubmit}
+          isLoading={isLoading}
+        />
+        <TouchableOpacity
+          style={styles.signIn}
           onPress={() => {
             navigation.navigate("SignIn" as any);
           }}
-        />
+        >
+          <Text style={styles.signInText}>Cadastrar</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { globalStyles } from "../../styles/globalStyles";
+import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,6 +10,6 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    color: globalStyles.colors.purple900,
+    color: theme.colors.purple900,
   },
 });

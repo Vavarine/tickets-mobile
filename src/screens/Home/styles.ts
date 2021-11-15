@@ -1,22 +1,22 @@
 import { StyleSheet } from "react-native";
-import { globalStyles } from "../../styles/globalStyles";
+import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: globalStyles.colors.background,
+    backgroundColor: theme.colors.background,
     alignItems: "center",
     justifyContent: "center",
   },
   title: {
-    marginTop: globalStyles.vh * 0.15,
-    marginBottom: globalStyles.vh * 0.1,
+    marginTop: theme.vh * 0.15,
+    marginBottom: theme.vh * 0.1,
     fontSize: 42,
-    color: globalStyles.colors.purple900,
+    color: theme.colors.purple900,
     fontWeight: "bold",
   },
   inputsContainer: {
-    // marginTop: globalStyles.vh * 0.1,
+    // marginTop: theme.vh * 0.1,
   },
   inputContainer: {
     position: "relative",

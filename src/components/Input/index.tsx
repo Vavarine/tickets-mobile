@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { TextInput, TextInputProps, TouchableOpacityProps, View } from "react-native";
-import Icon from "react-native-vector-icons/Feather";
-import { globalStyles } from "../../styles/globalStyles";
+import { Feather } from "@expo/vector-icons";
+
+import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
 
 type InputProps = TextInputProps & {
@@ -22,11 +23,11 @@ export function Input({ iconName, style, ...rest }: InputProps) {
         {...rest}
       />
       {iconName && (
-        <Icon
+        <Feather
           style={styles.icon}
-          name={iconName}
+          name={iconName as any}
           size={18}
-          color={globalStyles.colors.gray700}
+          color={theme.colors.gray700}
         />
       )}
     </View>

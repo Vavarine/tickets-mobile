@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/Feather";
 
 import useAuth from "../../hooks/useAuth";
 
-import { globalStyles } from "../../styles/globalStyles";
+import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
 
 export default function Header() {
@@ -21,7 +21,7 @@ export default function Header() {
         <Icon
           name="log-out"
           size={24}
-          color={globalStyles.colors.purple900}
+          color={theme.colors.purple900}
           onPress={handleIconPress}
         />
       </Text>

@@ -9,7 +9,7 @@ import { database } from "../../services/firebase";
 import { Input } from "../../components/Input";
 
 import { styles } from "./styles";
-import { globalStyles } from "../../styles/globalStyles";
+import { theme } from "../../global/styles/theme";
 import useAuth from "../../hooks/useAuth";
 
 export function AdminHome() {

@@ -6,7 +6,7 @@ import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { InputPassword } from "../../components/InputPassword";
 import { database } from "../../services/firebase";
-import { globalStyles } from "../../styles/globalStyles";
+import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
 
@@ -162,13 +162,13 @@ export function EditUser() {
       {!isKeyBoardUp && (
         <View style={styles.buttonsContainer}>
           <Button
-            style={{ width: globalStyles.vw * 0.38, marginRight: globalStyles.vw * 0.04 }}
+            style={{ width: theme.vw * 0.38, marginRight: theme.vw * 0.04 }}
             type="submit"
             text="Salvar"
             onPress={handleSubmit}
           />
           <Button
-            style={{ width: globalStyles.vw * 0.38 }}
+            style={{ width: theme.vw * 0.38 }}
             type="cancel"
             text="Excluir"
             onPress={handleDelete}
