@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/Feather";
 
 import { User } from "../../@types";
 import { UserCard } from "../../components/UserCard";
-import { database } from "../../services/firebase";
+import { firestore } from "../../services/firebase";
 import { Input } from "../../components/Input";
 
 import { styles } from "./styles";
@@ -33,7 +33,7 @@ export function AdminHome() {
   }, [searchTerm]);
 
   async function getUsers(searchString?: string) {
-    const usersRef = database.collection("users");
+    const usersRef = firestore.collection("users");
     if (!searchString || searchString === "") {
       const snapshot = await usersRef.get();
 
@@ -77,7 +77,6 @@ export function AdminHome() {
       >
         <Input iconName="search" value={searchTerm} onChangeText={setSearchTerm} />
       </View>
-
       <View>
         {users.map((user) => {
           return <UserCard key={user.id} user={user} id={user.id} />;

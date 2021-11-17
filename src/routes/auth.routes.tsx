@@ -1,10 +1,9 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { LogIn } from "../screens/LogIn";
-import { SignIn } from "../screens/SignIn";
 import { Home } from "../screens/Home";
 import { EditUser } from "../screens/EditUser";
+import NewTicket from "../screens/NewTicket";
 import useAuth from "../hooks/useAuth";
 import Header from "../components/header";
 
@@ -17,6 +16,7 @@ export function AuthRoutes() {
     <Navigator>
       <Screen name="Home" component={Home} options={{ headerTitle: Header }} />
       <Screen name="EditUser" component={EditUser} options={{ title: "" }} />
+      <Screen name="NewTicket" component={NewTicket} options={{ title: "Novo Ticket" }} />
     </Navigator>
   );
 }

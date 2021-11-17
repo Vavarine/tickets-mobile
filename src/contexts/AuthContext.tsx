@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { ToastAndroid } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { auth, database } from "../services/firebase";
+import { auth, firestore } from "../services/firebase";
 import storage from "../services/storage";
 
 import { User } from "../@types";
@@ -49,7 +49,7 @@ const AuthContextProvider: React.FC = ({ children }) => {
     try {
       const authData = await auth.signInWithEmailAndPassword(email, password);
 
-      const usersRef = database.collection("users");
+      const usersRef = firestore.collection("users");
       const snapshot = await usersRef.where("email", "==", authData.user.email).get();
 
       let loggedUser: User;
@@ -96,7 +96,7 @@ const AuthContextProvider: React.FC = ({ children }) => {
       throw new Error(err.code);
     }
 
-    const userRef = database.collection("users");
+    const userRef = firestore.collection("users");
     await userRef.add(userData);
 
     ToastAndroid.show("Cadastrado!", ToastAndroid.LONG);

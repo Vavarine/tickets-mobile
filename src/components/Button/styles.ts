@@ -4,13 +4,21 @@ import { theme } from "../../global/styles/theme";
 export const styles = StyleSheet.create({
   default: {
     height: 50,
-    width: theme.vw * 0.8,
+    width: theme.vw * 0.9,
     backgroundColor: theme.colors.gray700,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
     borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   cancel: {
     height: 50,

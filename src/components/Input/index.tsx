@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { TextInput, TextInputProps, TouchableOpacityProps, View } from "react-native";
+import {
+  StyleProp,
+  TextInput,
+  TextInputProps,
+  TouchableOpacityProps,
+  View,
+} from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 import { theme } from "../../global/styles/theme";
@@ -7,15 +13,16 @@ import { styles } from "./styles";
 
 type InputProps = TextInputProps & {
   iconName?: string;
+  inputStyle?: Object;
 };
 
-export function Input({ iconName, style, ...rest }: InputProps) {
+export function Input({ iconName, style, inputStyle, ...rest }: InputProps) {
   const [text, setText] = useState("");
 
   return (
     <View style={{ ...styles.inputContainer, ...(style as {}) }}>
       <TextInput
-        style={styles.input}
+        style={{ ...styles.input, ...inputStyle }}
         value={text}
         onChangeText={setText}
         autoCompleteType="email"

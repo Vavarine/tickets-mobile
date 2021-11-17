@@ -11,7 +11,12 @@ export function InputPassword({ style, ...rest }: InputPasswordProps) {
 
   return (
     <View style={{ ...styles.inputContainer, ...(style as {}) }}>
-      <TextInput style={styles.input} {...rest} secureTextEntry={isPasswordVisible} />
+      <TextInput
+        style={styles.input}
+        selectionColor={theme.colors.gray700}
+        {...rest}
+        secureTextEntry={isPasswordVisible}
+      />
       <View style={styles.icon}>
         <TouchableOpacity
           onPress={() => setIsPasswordVisible(!isPasswordVisible)}

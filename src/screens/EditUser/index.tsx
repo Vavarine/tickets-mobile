@@ -5,7 +5,7 @@ import { User } from "../../@types";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { InputPassword } from "../../components/InputPassword";
-import { database } from "../../services/firebase";
+import { firestore } from "../../services/firebase";
 import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
@@ -87,7 +87,7 @@ export function EditUser() {
       type: "costumer",
     };
 
-    const userRef = database.collection("users").doc(id);
+    const userRef = firestore.collection("users").doc(id);
 
     await userRef.update(data);
 
@@ -96,7 +96,7 @@ export function EditUser() {
   }
 
   async function handleDelete() {
-    const userRef = database.collection("users").doc(id);
+    const userRef = firestore.collection("users").doc(id);
 
     await userRef.delete();
 

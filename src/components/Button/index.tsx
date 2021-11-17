@@ -5,7 +5,7 @@ import {
   TouchableOpacityProps,
   ActivityIndicator,
 } from "react-native";
-import Icon from "react-native-vector-icons/Feather";
+import { Feather } from "@expo/vector-icons";
 import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
 
@@ -16,7 +16,14 @@ type ButtonProps = TouchableOpacityProps & {
   iconName?: string;
 };
 
-export function Button({ text, type, iconName, style, isLoading, ...rest }: ButtonProps) {
+export function Button({
+  text,
+  type,
+  iconName,
+  style,
+  isLoading = false,
+  ...rest
+}: ButtonProps) {
   if (isLoading) {
     return (
       <TouchableOpacity
@@ -34,7 +41,9 @@ export function Button({ text, type, iconName, style, isLoading, ...rest }: Butt
       {...rest}
       activeOpacity={0.8}
     >
-      {iconName && <Icon style={styles.icon} name="eye" size={18} color="#fff" />}
+      {iconName && (
+        <Feather style={styles.icon} name={iconName as any} size={18} color="#fff" />
+      )}
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );

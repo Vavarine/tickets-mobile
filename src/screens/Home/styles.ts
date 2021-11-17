@@ -3,7 +3,9 @@ import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: "100%",
+    paddingTop: 20,
+    paddingBottom: 20,
     backgroundColor: theme.colors.background,
     alignItems: "center",
     justifyContent: "center",
@@ -26,5 +28,11 @@ export const styles = StyleSheet.create({
     marginBottom: 40,
     display: "flex",
     flexDirection: "column",
+  },
+  searchInputContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
