@@ -35,4 +35,12 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  listsContainer: {
+    paddingTop: 10,
+    margin: 20,
+    paddingLeft: theme.vw * 0.05,
+    paddingRight: theme.vw * 0.05,
+    flex: 1,
+    width: theme.vw,
+  },
 });

@@ -4,3 +4,12 @@ export interface User {
   name: string;
   type: "costumer" | "admin" | "dev";
 }
+
+export interface Ticket {
+  id: string;
+  title: string;
+  description: string;
+  userEmail: string;
+  RDBKey: string;
+  status: "open" | "closed" | "waiting";
+}

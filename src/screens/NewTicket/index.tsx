@@ -6,6 +6,7 @@ import { Button } from "../../components/Button";
 import { styles } from "./styles";
 import { firestore, auth, database } from "../../services/firebase";
 import { useNavigation } from "@react-navigation/core";
+import { Ticket } from "../../@types";
 
 export default function NewTicket() {
   const [ticketTitle, setTicketTitle] = useState("");
@@ -32,12 +33,15 @@ export default function NewTicket() {
 
       const firestoreTicketsRef = firestore.collection("tickets");
 
-      await firestoreTicketsRef.add({
+      const ticket: Ticket = {
         title: ticketTitle,
         description: ticketDescription,
         userEmail: auth.currentUser.email,
         RDBKey: RDBTiketkey,
-      });
+        status: "waiting",
+      };
+
+      await firestoreTicketsRef.add(ticket);
     } catch (err) {
       console.log(err);
       ToastAndroid.show("Houve um erro!", ToastAndroid.LONG);

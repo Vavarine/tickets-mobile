@@ -23,6 +23,7 @@ export function Input({ iconName, style, inputStyle, ...rest }: InputProps) {
     <View style={{ ...styles.inputContainer, ...(style as {}) }}>
       <TextInput
         style={{ ...styles.input, ...inputStyle }}
+        selectionColor={theme.colors.gray700}
         value={text}
         onChangeText={setText}
         autoCompleteType="email"

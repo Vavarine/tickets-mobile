@@ -31,7 +31,7 @@ export function Button({
         {...rest}
         activeOpacity={0.8}
       >
-        <ActivityIndicator size="small" color={theme.colors.purple900} />
+        <ActivityIndicator size="small" color={theme.colors.white} />
       </TouchableOpacity>
     );
   }

@@ -11,6 +11,7 @@ import { auth, database } from "../../services/firebase";
 import { styles } from "./styles";
 
 export function SignIn() {
+  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState("");
   const [company, setcompany] = useState("");
   const [email, setEmail] = useState("");
@@ -67,6 +68,8 @@ export function SignIn() {
       return;
     }
 
+    setIsLoading(true);
+
     const userData: User = {
       name: name.trim(),
       company: company.trim(),
@@ -77,6 +80,7 @@ export function SignIn() {
     try {
       await signIn(userData, password.trim());
     } catch (err) {
+      setIsLoading(false);
       return;
     }
 
@@ -140,7 +144,12 @@ export function SignIn() {
 
       {!isKeyBoardUp && (
         <View style={styles.buttonsContainer}>
-          <Button type="default" text="Cadastrar" onPress={handleSubmit} />
+          <Button
+            type="default"
+            text="Cadastrar"
+            isLoading={isLoading}
+            onPress={handleSubmit}
+          />
         </View>
       )}
     </View>

@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
   },
   signInText: {
     fontSize: 16,
-    color: theme.colors.gray500,
+    color: theme.colors.purple900,
     textDecorationLine: "underline",
   },
 });

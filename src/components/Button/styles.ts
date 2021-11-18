@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   default: {
     height: 50,
     width: theme.vw * 0.9,
-    backgroundColor: theme.colors.gray700,
+    backgroundColor: theme.colors.purple900,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
