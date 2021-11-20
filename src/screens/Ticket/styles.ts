@@ -4,6 +4,8 @@ import { theme } from "../../global/styles/theme";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingBottom: 16,
+
     width: "100%",
     paddingHorizontal: theme.vw * 0.05,
     backgroundColor: theme.colors.background,
@@ -26,14 +28,10 @@ export const styles = StyleSheet.create({
     color: theme.colors.purple900,
     fontSize: 30,
   },
-  descriptionContainer: {
-    height: 200,
-    width: "98%",
-    marginTop: 5,
-    alignSelf: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-
+  description: {
+    height: "30%",
+    flexGrow: 0,
+    marginBottom: 20,
     backgroundColor: theme.colors.white100,
     borderRadius: 8,
 
@@ -46,5 +44,13 @@ export const styles = StyleSheet.create({
     shadowRadius: 2.22,
 
     elevation: 3,
+  },
+  descriptionContainer: {
+    // height: "100%",
+    width: "98%",
+    marginTop: 5,
+    alignSelf: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
   },
 });

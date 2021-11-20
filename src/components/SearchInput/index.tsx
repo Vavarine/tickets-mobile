@@ -25,20 +25,18 @@ export function SearchInput({ onSearchPress, isLoading = false }: SearchInputPro
         style={styles.input}
         value={text}
         onChangeText={setText}
-        autoCompleteType="email"
         autoCapitalize="none"
         selectionColor={theme.colors.gray700}
       />
-      <TouchableOpacity style={styles.button} activeOpacity={0.4}>
+      <TouchableOpacity
+        style={styles.button}
+        activeOpacity={0.4}
+        onPress={() => onSearchPress(text)}
+      >
         {isLoading ? (
           <ActivityIndicator size="small" color={theme.colors.purple900} />
         ) : (
-          <Feather
-            name="search"
-            size={20}
-            color={theme.colors.purple900}
-            onPress={() => onSearchPress(text)}
-          />
+          <Feather name="search" size={20} color={theme.colors.purple900} />
         )}
       </TouchableOpacity>
     </View>

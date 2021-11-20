@@ -18,24 +18,8 @@ export function SignIn() {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
 
-  const [isKeyBoardUp, setIsKeyBoardUp] = useState(false);
-
   const { signIn } = useAuth();
   const navigation = useNavigation();
-
-  useEffect(() => {
-    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
-      setIsKeyBoardUp(true);
-    });
-    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
-      setIsKeyBoardUp(false);
-    });
-
-    return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
-    };
-  }, []);
 
   async function handleSubmit() {
     if (

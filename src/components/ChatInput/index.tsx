@@ -19,26 +19,29 @@ export function ChatInput({ onSendPress, isLoading = false }: ChatInputProps) {
     if (text === "") onSendPress?.("");
   }, [text]);
 
+  function handleSendPress() {
+    onSendPress(text);
+    setText("");
+  }
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.input}
         value={text}
         onChangeText={setText}
-        autoCompleteType="email"
-        autoCapitalize="none"
+        autoCapitalize="sentences"
         selectionColor={theme.colors.gray700}
       />
-      <TouchableOpacity style={styles.button} activeOpacity={0.4}>
+      <TouchableOpacity
+        style={styles.button}
+        activeOpacity={0.4}
+        onPress={handleSendPress}
+      >
         {isLoading ? (
           <ActivityIndicator size="small" color={theme.colors.purple900} />
         ) : (
-          <Feather
-            name="send"
-            size={20}
-            color={theme.colors.purple900}
-            onPress={() => onSendPress(text)}
-          />
+          <Feather name="send" size={20} color={theme.colors.purple900} />
         )}
       </TouchableOpacity>
     </View>

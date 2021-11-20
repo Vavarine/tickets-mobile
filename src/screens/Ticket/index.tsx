@@ -1,6 +1,6 @@
 import { useNavigation, useRoute } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
-import { Text, View, TouchableOpacity, ActivityIndicator } from "react-native";
+import { Text, View, TouchableOpacity, ActivityIndicator, Keyboard } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
 import useAuth from "../../hooks/useAuth";
@@ -62,7 +62,10 @@ export function TicketScreen() {
         )}
       </View>
       <Text style={styles.title}>{ticket.title}</Text>
-      <ScrollView contentContainerStyle={styles.descriptionContainer}>
+      <ScrollView
+        style={styles.description}
+        contentContainerStyle={styles.descriptionContainer}
+      >
         <Text>{ticket.description}</Text>
       </ScrollView>
       <TicketChat chatKey={ticket.RDBKey} />
