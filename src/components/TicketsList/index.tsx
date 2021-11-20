@@ -7,6 +7,7 @@ import { TicketCard } from "../TicketCard";
 import { styles } from "./styles";
 import { ScrollView } from "react-native-gesture-handler";
 import { theme } from "../../global/styles/theme";
+import { useNavigation } from "@react-navigation/core";
 
 interface TicketsListProps {
   title: string;
@@ -14,6 +15,8 @@ interface TicketsListProps {
 }
 
 function TicketsList({ title, tickets }: TicketsListProps) {
+  const navigation = useNavigation();
+
   return (
     <View style={{ ...styles.container }}>
       <Text style={styles.title}>

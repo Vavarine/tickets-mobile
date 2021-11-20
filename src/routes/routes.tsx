@@ -10,7 +10,7 @@ export function PublicRoutes() {
   return (
     <Navigator>
       <Screen name="LogIn" component={LogIn} options={{ headerShown: false }} />
-      <Screen name="SignIn" component={SignIn} options={{ title: "" }} />
+      <Screen name="SignIn" component={SignIn} options={{ title: "Cadastrar-se" }} />
     </Navigator>
   );
 }

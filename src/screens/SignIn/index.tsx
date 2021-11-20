@@ -95,8 +95,6 @@ export function SignIn() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Cadastre-se</Text>
-
       <View style={styles.inputsContainer}>
         <Input
           iconName="user"
@@ -142,16 +140,14 @@ export function SignIn() {
         />
       </View>
 
-      {!isKeyBoardUp && (
-        <View style={styles.buttonsContainer}>
-          <Button
-            type="default"
-            text="Cadastrar"
-            isLoading={isLoading}
-            onPress={handleSubmit}
-          />
-        </View>
-      )}
+      <View style={styles.buttonsContainer}>
+        <Button
+          type="default"
+          text="Cadastrar"
+          isLoading={isLoading}
+          onPress={handleSubmit}
+        />
+      </View>
     </View>
   );
 }

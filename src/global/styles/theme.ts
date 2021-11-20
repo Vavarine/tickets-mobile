@@ -9,6 +9,7 @@ export const theme = {
     background: "#eee",
     white: "#eee",
     white100: "#eeeeef",
+    white200: "#eeeeff",
     purple900: "#392F5A",
     red500: "#c5283d",
     green500: "#1AAE9F",

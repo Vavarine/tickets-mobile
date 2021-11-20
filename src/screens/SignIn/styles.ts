@@ -14,8 +14,10 @@ export const styles = StyleSheet.create({
     fontSize: 42,
     color: theme.colors.purple900,
     fontWeight: "bold",
+    fontFamily: theme.fonts.title700,
   },
   inputsContainer: {
+    marginTop: "auto",
     marginBottom: "auto",
   },
   inputContainer: {

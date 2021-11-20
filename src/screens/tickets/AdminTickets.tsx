@@ -7,7 +7,7 @@ import { Ticket } from "../../@types";
 import { styles } from "./styles";
 import { SearchInput } from "../../components/SearchInput";
 import { Button } from "../../components/Button";
-import { useNavigation } from "@react-navigation/core";
+import { useIsFocused, useNavigation } from "@react-navigation/core";
 import { TicketsList } from "../../components/TicketsList";
 import { firestore } from "../../services/firebase";
 import { ScrollView } from "react-native-gesture-handler";
@@ -24,10 +24,11 @@ export function AdminTickets() {
 
   const { user } = useAuth();
   const navigation = useNavigation();
+  const isFocussed = useIsFocused();
 
   useEffect(() => {
     getTickets();
-  }, []);
+  }, [isFocussed]);
 
   useEffect(() => {
     if (!searchTerm || searchTerm === "") setSearchedTickets(tickets);

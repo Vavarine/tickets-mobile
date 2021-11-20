@@ -3,7 +3,7 @@ import { theme } from "../../global/styles/theme";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 
-import { Tickets } from "../tickets";
+import { Tickets } from "../Tickets";
 import { Users } from "../Users/Index";
 
 const Tab = createBottomTabNavigator();

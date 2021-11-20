@@ -7,16 +7,16 @@ import { Feather } from "@expo/vector-icons";
 import { theme } from "../../global/styles/theme";
 import { styles } from "./styles";
 
-interface SearchInputProps {
-  onSearchPress?: (searchTerm: string) => void;
+interface ChatInputProps {
+  onSendPress?: (searchTerm: string) => void;
   isLoading?: boolean;
 }
 
-export function SearchInput({ onSearchPress, isLoading = false }: SearchInputProps) {
+export function ChatInput({ onSendPress, isLoading = false }: ChatInputProps) {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    if (text === "") onSearchPress?.("");
+    if (text === "") onSendPress?.("");
   }, [text]);
 
   return (
@@ -34,10 +34,10 @@ export function SearchInput({ onSearchPress, isLoading = false }: SearchInputPro
           <ActivityIndicator size="small" color={theme.colors.purple900} />
         ) : (
           <Feather
-            name="search"
+            name="send"
             size={20}
             color={theme.colors.purple900}
-            onPress={() => onSearchPress(text)}
+            onPress={() => onSendPress(text)}
           />
         )}
       </TouchableOpacity>
