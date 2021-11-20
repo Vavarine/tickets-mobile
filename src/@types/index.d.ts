@@ -6,7 +6,7 @@ export interface User {
 }
 
 export interface Ticket {
-  id: string;
+  id?: string;
   title: string;
   description: string;
   userEmail: string;

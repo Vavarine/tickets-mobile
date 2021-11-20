@@ -1,87 +1,34 @@
-import React, { useEffect, useState } from "react";
-import { useIsFocused } from "@react-navigation/native";
-import { Text, View } from "react-native";
-import Icon from "react-native-vector-icons/Feather";
-
-import { User } from "../../@types";
-import { UserCard } from "../../components/UserCard";
-import { firestore } from "../../services/firebase";
-import { Input } from "../../components/Input";
-
-import { styles } from "./styles";
+import React from "react";
 import { theme } from "../../global/styles/theme";
-import useAuth from "../../hooks/useAuth";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Feather } from "@expo/vector-icons";
+
+import { Tickets } from "../tickets";
+import { Users } from "../Users/Index";
+
+const Tab = createBottomTabNavigator();
 
 export function AdminHome() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [users, setUsers] = useState([]);
-
-  const { user } = useAuth();
-
-  const isFocused = useIsFocused();
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  useEffect(() => {
-    getUsers();
-  }, [isFocused]);
-
-  useEffect(() => {
-    getUsers(searchTerm);
-  }, [searchTerm]);
-
-  async function getUsers(searchString?: string) {
-    const usersRef = firestore.collection("users");
-    if (!searchString || searchString === "") {
-      const snapshot = await usersRef.get();
-
-      const usersList = [];
-
-      snapshot.forEach((user) => {
-        usersList.push({ ...user.data(), id: user.id });
-      });
-
-      setUsers(usersList);
-
-      return;
-    }
-
-    const snapshot = await usersRef
-      .orderBy("email")
-      .startAt(searchString)
-      .endAt(searchString + "\uf8ff")
-      .get();
-
-    const usersList = [];
-
-    snapshot.forEach((user) => {
-      usersList.push({ ...user.data(), id: user.id });
-    });
-
-    setUsers(usersList);
-  }
-
   return (
-    <View style={{ ...styles.container, justifyContent: "flex-start" }}>
-      <View
-        style={{
-          marginTop: 30,
-          marginBottom: 40,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "row",
-        }}
-      >
-        <Input iconName="search" value={searchTerm} onChangeText={setSearchTerm} />
-      </View>
-      <View>
-        {users.map((user) => {
-          return <UserCard key={user.id} user={user} id={user.id} />;
-        })}
-      </View>
-    </View>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName: string | any;
+
+          if (route.name === "Tickets") {
+            iconName = "layers";
+          } else if (route.name === "Users") {
+            iconName = "users";
+          }
+
+          return <Feather name={iconName} color={color} size={22} />;
+        },
+        tabBarActiveTintColor: theme.colors.purple900,
+        tabBarInactiveTintColor: theme.colors.gray400,
+      })}
+    >
+      <Tab.Screen name="Tickets" component={Tickets} options={{ headerShown: false }} />
+      <Tab.Screen name="Users" component={Users} options={{ headerShown: false }} />
+    </Tab.Navigator>
   );
 }
