@@ -15,7 +15,11 @@ export function AuthRoutes() {
   return (
     <Navigator>
       <Screen name="Home" component={Home} options={{ headerTitle: Header }} />
-      <Screen name="EditUser" component={EditUser} options={{ title: "" }} />
+      <Screen
+        name="EditUser"
+        component={EditUser}
+        options={{ title: "Editar usuario" }}
+      />
       <Screen name="NewTicket" component={NewTicket} options={{ title: "Novo Ticket" }} />
     </Navigator>
   );

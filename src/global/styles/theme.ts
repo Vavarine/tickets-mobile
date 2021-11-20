@@ -8,6 +8,7 @@ export const theme = {
   colors: {
     background: "#eee",
     white: "#eee",
+    white100: "#eeeeef",
     purple900: "#392F5A",
     red500: "#c5283d",
     green500: "#1AAE9F",

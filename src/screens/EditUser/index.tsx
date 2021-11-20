@@ -9,6 +9,7 @@ import { firestore } from "../../services/firebase";
 import { theme } from "../../global/styles/theme";
 
 import { styles } from "./styles";
+import { RadioSelector } from "../../components/RadioSelector";
 
 interface EditUserParams {
   user: User;
@@ -22,8 +23,7 @@ export function EditUser() {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+  const [type, setType] = useState<User["type"]>();
 
   const [isKeyBoardUp, setIsKeyBoardUp] = useState(false);
 
@@ -39,6 +39,7 @@ export function EditUser() {
     setName(user.name);
     setEmail(user.email);
     setCompany(user.company);
+    setType(user.type);
     // setPassword(user.password);
 
     const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
@@ -55,13 +56,7 @@ export function EditUser() {
   }, []);
 
   async function handleSubmit() {
-    if (
-      name === "" ||
-      company === "" ||
-      email === "" ||
-      password === "" ||
-      repeatPassword === ""
-    ) {
+    if (name === "" || company === "" || email === "") {
       ToastAndroid.show("Preencha todos os campos!", ToastAndroid.LONG);
 
       return;
@@ -73,18 +68,11 @@ export function EditUser() {
       return;
     }
 
-    if (password !== repeatPassword) {
-      ToastAndroid.show("Senhas não coincidem!", ToastAndroid.LONG);
-
-      return;
-    }
-
     const data = {
       name: name.trim(),
       company: company.trim(),
       email: email.trim(),
-      password: password.trim(),
-      type: "costumer",
+      type: type,
     };
 
     const userRef = firestore.collection("users").doc(id);
@@ -112,8 +100,6 @@ export function EditUser() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Editar Usuário</Text>
-
       <View style={styles.inputsContainer}>
         <Input
           iconName="user"
@@ -122,7 +108,8 @@ export function EditUser() {
           onChangeText={setName}
           autoCompleteType="name"
           autoCapitalize="words"
-          style={{ marginBottom: 20 }}
+          style={{ marginBottom: 20, width: theme.vw * 0.9 }}
+          inputStyle={{ width: theme.vw * 0.9 }}
         />
 
         <Input
@@ -131,7 +118,8 @@ export function EditUser() {
           value={company}
           onChangeText={setCompany}
           autoCapitalize="words"
-          style={{ marginBottom: 20 }}
+          style={{ marginBottom: 20, width: theme.vw * 0.9 }}
+          inputStyle={{ width: theme.vw * 0.9 }}
         />
 
         <Input
@@ -140,41 +128,33 @@ export function EditUser() {
           value={email}
           onChangeText={setEmail}
           autoCompleteType="email"
-          style={{ marginBottom: 20 }}
+          style={{ marginBottom: 40, width: theme.vw * 0.9 }}
+          inputStyle={{ width: theme.vw * 0.9 }}
         />
-
-        <InputPassword
-          value={password}
-          placeholder="Senha"
-          onChangeText={setPassword}
-          autoCompleteType="password"
-          style={{ marginBottom: 20 }}
-        />
-
-        <InputPassword
-          value={repeatPassword}
-          placeholder="Repita a senha"
-          onChangeText={setRepeatPassword}
-          autoCompleteType="password"
+        <RadioSelector
+          onSelect={(value: User["type"]) => setType(value)}
+          items={[
+            { title: "Admin", value: "admin", selected: user.type === "admin" },
+            { title: "Dev", value: "dev", selected: user.type === "dev" },
+            { title: "Cliente", value: "costumer", selected: user.type === "costumer" },
+          ]}
         />
       </View>
 
-      {!isKeyBoardUp && (
-        <View style={styles.buttonsContainer}>
-          <Button
-            style={{ width: theme.vw * 0.38, marginRight: theme.vw * 0.04 }}
-            type="submit"
-            text="Salvar"
-            onPress={handleSubmit}
-          />
-          <Button
-            style={{ width: theme.vw * 0.38 }}
-            type="cancel"
-            text="Excluir"
-            onPress={handleDelete}
-          />
-        </View>
-      )}
+      <View style={styles.buttonsContainer}>
+        <Button
+          style={{ width: theme.vw * 0.38, marginRight: theme.vw * 0.04 }}
+          type="submit"
+          text="Salvar"
+          onPress={handleSubmit}
+        />
+        <Button
+          style={{ width: theme.vw * 0.38 }}
+          type="cancel"
+          text="Excluir"
+          onPress={handleDelete}
+        />
+      </View>
     </View>
   );
 }

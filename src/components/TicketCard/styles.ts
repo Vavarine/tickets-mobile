@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     width: theme.vw * 0.6,
     borderRadius: 8,
     fontSize: 18,
-    backgroundColor: "#eeeeef",
+    backgroundColor: theme.colors.white100,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

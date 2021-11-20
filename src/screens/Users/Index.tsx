@@ -11,6 +11,7 @@ import { Input } from "../../components/Input";
 import { styles } from "./styles";
 import { theme } from "../../global/styles/theme";
 import useAuth from "../../hooks/useAuth";
+import { ScrollView } from "react-native-gesture-handler";
 
 export function Users() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,23 +66,22 @@ export function Users() {
 
   return (
     <View style={{ ...styles.container, justifyContent: "flex-start" }}>
-      <View
-        style={{
-          marginTop: 30,
-          marginBottom: 40,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "row",
-        }}
-      >
-        <Input iconName="search" value={searchTerm} onChangeText={setSearchTerm} />
+      <View style={styles.seachContainer}>
+        <Input
+          iconName="search"
+          value={searchTerm}
+          onChangeText={setSearchTerm}
+          style={{ width: theme.vw * 0.9 }}
+          inputStyle={{ width: theme.vw * 0.9 }}
+        />
       </View>
-      <View>
-        {users.map((user) => {
-          return <UserCard key={user.id} user={user} id={user.id} />;
+      <ScrollView contentContainerStyle={styles.list}>
+        {users.map((curUser) => {
+          if (curUser.email === user.email) return;
+
+          return <UserCard key={curUser.id} user={curUser} id={curUser.id} />;
         })}
-      </View>
+      </ScrollView>
     </View>
   );
 }

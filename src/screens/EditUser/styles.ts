@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   inputsContainer: {
+    marginTop: "auto",
     marginBottom: "auto",
   },
   inputContainer: {
@@ -42,5 +43,10 @@ export const styles = StyleSheet.create({
     marginBottom: 40,
     display: "flex",
     flexDirection: "row",
+  },
+  picker: {
+    borderColor: theme.colors.gray700,
+    borderRadius: 8,
+    color: theme.colors.gray700,
   },
 });

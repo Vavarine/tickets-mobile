@@ -3,19 +3,24 @@ import { theme } from "../../global/styles/theme";
 
 export const styles = StyleSheet.create({
   container: {
-    height: 50,
-    marginBottom: 10,
-    paddingLeft: 15,
-    paddingRight: 15,
-    width: theme.vw * 0.85,
-    borderRadius: 8,
-    borderColor: theme.colors.gray500,
+    width: theme.vw * 0.9,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
     fontSize: 18,
     backgroundColor: theme.colors.white100,
+  },
+  itemContainer: {
+    flex: 1,
+    borderRadius: 8,
+    height: 50,
+    paddingHorizontal: 15,
+
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+
+    backgroundColor: theme.colors.white100,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -25,5 +30,12 @@ export const styles = StyleSheet.create({
     shadowRadius: 2.22,
 
     elevation: 3,
+  },
+  title: {
+    flex: 1,
+    textAlign: "center",
+    marginHorizontal: "auto",
+    color: theme.colors.purple900,
+    fontFamily: theme.fonts.text400,
   },
 });
