@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   },
   header: {
     paddingVertical: 10,
-    marginBottom: 10,
+    marginBottom: 6,
     width: "100%",
     display: "flex",
     flexDirection: "row",
@@ -24,14 +24,15 @@ export const styles = StyleSheet.create({
     fontSize: 20,
   },
   title: {
+    marginBottom: 4,
     fontFamily: theme.fonts.title700,
     color: theme.colors.purple900,
     fontSize: 30,
   },
   description: {
-    height: "30%",
+    height: "26%",
     flexGrow: 0,
-    marginBottom: 20,
+    marginBottom: 0,
     backgroundColor: theme.colors.white100,
     borderRadius: 8,
 
@@ -52,5 +53,12 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     paddingVertical: 10,
     paddingHorizontal: 15,
+  },
+  aproveButton: {
+    paddingTop: 8,
+    height: 50,
+    width: theme.vw * 0.9,
+    marginBottom: 20,
+    marginTop: -12,
   },
 });

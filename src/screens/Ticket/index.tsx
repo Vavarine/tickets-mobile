@@ -11,12 +11,14 @@ import { theme } from "../../global/styles/theme";
 import { database, firestore } from "../../services/firebase";
 import { ScrollView } from "react-native-gesture-handler";
 import { TicketChat } from "../../components/TicketChat";
+import { Button } from "../../components/Button";
 
 interface TicketParams {
   ticket: Ticket;
 }
 
 export function TicketScreen() {
+  const [isControlLoading, setIsControlLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [ticketUser, setTicketUser] = useState<User>();
   const { user } = useAuth();
@@ -47,6 +49,28 @@ export function TicketScreen() {
     navigation.goBack();
   }
 
+  async function handleOpenPress() {
+    setIsControlLoading(true);
+
+    const ticketRef = firestore.collection("tickets");
+    await ticketRef.doc(ticket.id).update({
+      status: "open",
+    });
+
+    navigation.goBack();
+  }
+
+  async function handleClosePress() {
+    setIsControlLoading(true);
+
+    const ticketRef = firestore.collection("tickets");
+    await ticketRef.doc(ticket.id).update({
+      status: "closed",
+    });
+
+    navigation.goBack();
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -68,6 +92,33 @@ export function TicketScreen() {
       >
         <Text>{ticket.description}</Text>
       </ScrollView>
+      {user.type === "admin" && ticket.status === "waiting" && (
+        <Button
+          text="Aprovar"
+          type="submit"
+          onPress={handleOpenPress}
+          style={styles.aproveButton}
+          isLoading={isControlLoading}
+        />
+      )}
+      {user.type === "admin" && ticket.status === "closed" && (
+        <Button
+          text="Reabrir"
+          type="submit"
+          onPress={handleOpenPress}
+          style={styles.aproveButton}
+          isLoading={isControlLoading}
+        />
+      )}
+      {ticket.status === "open" && (
+        <Button
+          text="Marcar como feito"
+          type="submit"
+          onPress={handleClosePress}
+          style={styles.aproveButton}
+          isLoading={isControlLoading}
+        />
+      )}
       <TicketChat chatKey={ticket.RDBKey} />
     </View>
   );

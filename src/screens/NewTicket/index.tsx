@@ -69,6 +69,7 @@ export default function NewTicket() {
 
         <Input
           multiline
+          autoCapitalize="sentences"
           placeholder="Sobre o que é?"
           value={ticketDescription}
           onChangeText={setTicketDescription}

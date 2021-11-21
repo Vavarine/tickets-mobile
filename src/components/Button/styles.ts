@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
   submit: {
     height: 50,
     width: theme.vw * 0.8,
-    backgroundColor: theme.colors.green500,
+    backgroundColor: "#96BC8A",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -45,6 +45,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
   },
   icon: {
-    marginRight: 16,
+    marginLeft: 16,
   },
 });

@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Input } from "../../components/Input";
-import { Text, View } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { View } from "react-native";
 
 import useAuth from "../../hooks/useAuth";
-import { Ticket, User } from "../../@types";
+import { Ticket } from "../../@types";
 
 import { styles } from "./styles";
-import { theme } from "../../global/styles/theme";
 import { SearchInput } from "../../components/SearchInput";
 import { Button } from "../../components/Button";
-import { useNavigation, useIsFocused } from "@react-navigation/core";
+import { useIsFocused, useNavigation } from "@react-navigation/core";
 import { TicketsList } from "../../components/TicketsList";
 import { firestore } from "../../services/firebase";
-import { TicketCard } from "../../components/TicketCard";
-
 import { ScrollView } from "react-native-gesture-handler";
 
-export function CostumerHome() {
+export function DevTickets() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,11 +24,11 @@ export function CostumerHome() {
 
   const { user } = useAuth();
   const navigation = useNavigation();
-  const isFocused = useIsFocused();
+  const isFocussed = useIsFocused();
 
   useEffect(() => {
     getTickets();
-  }, [isFocused]);
+  }, [isFocussed]);
 
   useEffect(() => {
     if (!searchTerm || searchTerm === "") setSearchedTickets(tickets);
@@ -53,9 +48,9 @@ export function CostumerHome() {
   }, [searchedTickets]);
 
   async function getTickets() {
-    const ticketsRef = firestore
-      .collection("tickets")
-      .where("userEmail", "==", user.email);
+    setIsLoading(true);
+
+    const ticketsRef = firestore.collection("tickets");
 
     const snapshot = await ticketsRef.get();
     const ticketsList = [];
@@ -64,6 +59,7 @@ export function CostumerHome() {
       ticketsList.push({ ...ticket.data(), id: ticket.id });
     });
 
+    setIsLoading(false);
     setTickets(ticketsList);
   }
 
@@ -78,16 +74,9 @@ export function CostumerHome() {
         style={styles.listsContainer}
         contentContainerStyle={{ paddingBottom: 40 }}
       >
-        <TicketsList title="Ainda não abertos" tickets={waitingTickets} />
         <TicketsList title="Abertos" tickets={openTickets} />
         <TicketsList title="Fechados" tickets={closedTickets} />
       </ScrollView>
-      <Button
-        text="Novo ticket"
-        type="default"
-        iconName="plus-circle"
-        onPress={handleNewTicketPress}
-      />
     </View>
   );
 }

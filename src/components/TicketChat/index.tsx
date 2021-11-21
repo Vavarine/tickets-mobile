@@ -30,10 +30,6 @@ export function TicketChat({ chatKey }: TicketChatProps) {
     getMessages();
   }, []);
 
-  useEffect(() => {
-    console.log(messages);
-  }, [messages]);
-
   async function getMessages() {
     const messagesRef = database.ref("tickets/" + chatKey + "/messages");
     // const snapShot = await messagesRef.get();
